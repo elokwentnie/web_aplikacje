@@ -3,18 +3,25 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wyniki.db'
+
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+manager = Manager(app)
+
+manager.add_command('db', MigrateCommand)
+
 
 class Formdata(db.Model):
     __tablename__ = 'formdata'
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.now)
     age = db.Column(db.Integer)
-    home = db.Column(db.String)
+    home = db.Column(db.Integer)
     gender = db.Column(db.Integer)
     alcohol = db.Column(db.Integer)
     government = db.Column(db.Integer)
@@ -55,8 +62,18 @@ def team():
 
 
 @app.route('/results', methods=['GET','POST'])
-def reasults():
-    return render_template('results.htm')
+def results():
+    # store the available options representations
+    age_options = {1: 'Poniżej 20 lat', 2: 'Między 20 a 50 lat', 3: 'Powyżej 50 lat'}
+    home_options = {1: "Wieś", 2: "Małe miasto", 3: "Duże miasto"}
+    gender_options = {1: "Mężczyzna", 2: "Kobieta", 3: "Nie chcę podawać"}
+    personal_data = db.session.query(Formdata.age, Formdata.home, Formdata.gender).all()
+    # create data for rendering
+    ages = [[age_options[opt], len([x[0] for x in personal_data if x[0] == opt])] for opt in age_options.keys()]
+    homes = [[home_options[opt], len([x[1] for x in personal_data if x[1] == opt])] for opt in home_options.keys()]
+    genders = [[gender_options[opt], len([x[2] for x in personal_data if x[2] == opt])] for opt in gender_options.keys()]
+
+    return render_template('results.htm', ages=ages)
 
 @app.route("/save", methods=['POST'])
 def save():
@@ -78,4 +95,5 @@ def save():
     return redirect('/results')
 
 if __name__ == "__main__":
+    #manager.run()
     app.run(debug=True)
