@@ -73,7 +73,7 @@ def results():
     homes = [[home_options[opt], len([x[1] for x in personal_data if x[1] == opt])] for opt in home_options.keys()]
     genders = [[gender_options[opt], len([x[2] for x in personal_data if x[2] == opt])] for opt in gender_options.keys()]
 
-    return render_template('results.htm', ages=ages)
+    return render_template('results.htm', ages=ages, homes=homes, genders=genders)
 
 @app.route("/save", methods=['POST'])
 def save():
