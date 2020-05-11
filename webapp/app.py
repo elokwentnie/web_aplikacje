@@ -23,22 +23,34 @@ class Formdata(db.Model):
     age = db.Column(db.Integer)
     home = db.Column(db.Integer)
     gender = db.Column(db.Integer)
-    alcohol = db.Column(db.Integer)
-    government = db.Column(db.Integer)
+    education = db.Column(db.Integer)
+    place = db.Column(db.Integer)
     corona = db.Column(db.Integer)
-    eat = db.Column(db.Integer)
+    easter = db.Column(db.Integer)
+    view = db.Column(db.Integer)
     feeling = db.Column(db.Integer)
+    badfeeling = db.Column(db.Integer)
+    alcohol = db.Column(db.Integer)
+    eat = db.Column(db.Integer)
+    selfimpr = db.Column(db.Integer)
+    job = db.Column(db.Integer)
     status = db.Column(db.Integer)
 
-    def __init__(self, age, home, gender, alcohol, government, corona, eat, feeling, status):
+    def __init__(self, age, home, gender, education, place, corona, easter, view, feeling, badfeeling, alcohol, eat, selfimpr, job, status):
         self.age = age
         self.home = home
         self.gender = gender
-        self.alcohol = alcohol
-        self.government = government
+        self.education = education
+        self.place = place
         self.corona = corona
-        self.eat = eat
+        self.easter = easter
+        self.view = view
         self.feeling = feeling
+        self.badfeeling = badfeeling
+        self.alcohol = alcohol
+        self.eat = eat
+        self.selfimpr = selfimpr
+        self.job = job
         self.status = status
 
 
@@ -64,8 +76,8 @@ def team():
 @app.route('/results', methods=['GET','POST'])
 def results():
     # store the available options representations
-    age_options = {1: 'Poniżej 20 lat', 2: 'Między 20 a 50 lat', 3: 'Powyżej 50 lat'}
-    home_options = {1: "Wieś", 2: "Małe miasto", 3: "Duże miasto"}
+    age_options = {1: 'Poniżej 18 lat', 2: '18-25 lat', 3: '25-40 lat', 4: 'Powyżej 40 lat'}
+    home_options = {1: "Wieś", 2: "Miasto (do 50 tys. mieszkancow)", 3: "Miasto (50 - 500 tys. mieszkancow", 4: "Miasto (+ 500 tys. mieszkańców)"}
     gender_options = {1: "Mężczyzna", 2: "Kobieta", 3: "Nie chcę podawać"}
     personal_data = db.session.query(Formdata.age, Formdata.home, Formdata.gender).all()
     # create data for rendering
@@ -81,19 +93,25 @@ def save():
     age = request.form['age']
     home = request.form['home']
     gender = request.form['gender']
-    alcohol = request.form['alcohol']
-    government = request.form['government']
+    education = request.form['education']
+    place = request.form['place']
     corona = request.form['corona']
-    eat = request.form['eat']
+    easter = request.form['easter']
+    view = request.form['view']
     feeling = request.form['feeling']
+    badfeeling = request.form['badfeeling']
+    alcohol = request.form['alcohol']
+    eat = request.form['eat']
+    selfimpr = request.form['selfimpr']
+    job = request.form['job']
     status = request.form['status']
     # Save the data
-    fd = Formdata(age, home, gender, alcohol, government, corona, eat, feeling, status)
+    fd = Formdata(age, home, gender, education, place, corona, easter, view, feeling, badfeeling, alcohol, eat, selfimpr, job, status)
     db.session.add(fd)
     db.session.commit()
 
     return redirect('/results')
 
 if __name__ == "__main__":
-    #manager.run()
-    app.run(debug=True)
+    manager.run()
+    #app.run(debug=True)

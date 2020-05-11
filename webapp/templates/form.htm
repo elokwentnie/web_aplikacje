@@ -17,9 +17,10 @@
       <label for="age">Proszę wybrać swój wiek</label>
       <select class="form-control" id="age" name="age">
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
-        <option value="1" >Poniżej 20 lat</option>
-        <option value="2">20-49 lat</option>
-        <option value="3">powyżej 50lat</option>
+        <option value="1" >Poniżej 18 lat</option>
+        <option value="2">18-25 lat</option>
+        <option value="3">25 - 40 lat</option>
+        <option value="4">Powyżej 40 lat</option>
        </select>
      </div>
 
@@ -28,8 +29,9 @@
       <select class="form-control" id="home" name="home">
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Wieś</option>
-        <option value="2">Małe miasto (do 50 tyś. mieszkańców)</option>
-        <option value="3">Duże miasto (powyżej 50 tyś. mieszkańców)</option>
+        <option value="2">Miasto (do 50 tys. mieszkańców)</option>
+        <option value="3">Miasto (50 - 500 tys. mieszkańców)</option>
+        <option value="4">Miasto (+ 500 tys. mieszkańców)</option>
        </select>
      </div>
 
@@ -39,27 +41,31 @@
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Mężczyzna</option>
         <option value="2">Kobieta</option>
-        <option value="3">Nie chce podawac</option>
-       </select>
-     </div>
-     <h3>Zachowania behawioralne</h3>
-    <div class="form-group">
-      <label for="alcohol">Jak okreslasz zmiane spozycia alkoholu od wprowadzenia stanu zagrozenia epidemiologicznego?</label>
-      <select class="form-control" id="alcohol" name="alcohol">
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
-        <option value="1">Brak zmian</option>
-        <option value="2">Zmalalo</option>
-        <option value="3">Wzroslo</option>
+        <option value="3">Nie chcę podawac</option>
        </select>
      </div>
 
     <div class="form-group">
-      <label for="government">Jak oceniasz dzialania rzadu w obecnej sytuacji</label>
-      <select class="form-control" id="government" name="government">
+      <label for="education">Twój poziom wykształcenia</label>
+      <select class="form-control" id="education" name="education">
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
-        <option value="1">Pozytywnie</option>
-        <option value="2">Neutralnie</option>
-        <option value="3">Negatywnie</option>
+        <option value="1">Podstawowe</option>
+        <option value="2">Zawodowe</option>
+        <option value="3">Średnie</option>
+        <option value="4">Wyższe</option>
+        <option value="5">Inne</option>
+       </select>
+     </div>
+
+    <br>
+     <h3>Zachowania behawioralne</h3>
+    <div class="form-group">
+      <label for="place">Gdzie znajdowałeś się w momencie ogłoszenia stanu pandemii koronawirusa?</label>
+      <select class="form-control" id="place" name="place">
+        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="1">W miejscowości rodzinnej</option>
+        <option value="2">W miejsowości, w której wynajmuję pokój / mieszkanie</option>
+        <option value="3">Inne</option>
        </select>
      </div>
 
@@ -73,32 +79,14 @@
        </select>
      </div>
 
-
-    <b>Jak od wprowadzenia stanu epidemiologicznego w kraju zmienila sie Twoja dieta?</b>
     <div class="form-group">
-        <label class="radio-inline">
-          <input type="radio" name="eat" value="1" required>Nie zmienila sie
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="eat" value="2">Jem mniej
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="eat" value="3">Jem wiecej
-        </label>
-    </div>
-
-    <b>Czy obecna sytuacja wplynela na stan Twojego samopoczucia?</b>
-    <div class="form-group">
-        <label class="radio-inline">
-          <input type="radio" name="feeling" value="1" required>Tak
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="feeling" value="2">Nie
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="feeling" value="3">Nie wiem
-        </label>
-    </div>
+      <label for="easter">Czy miałeś okazję spędzić Święta Wielkanocne z rodziną?</label>
+      <select class="form-control" id="easter" name="easter">
+        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="1">Tak</option>
+        <option value="2">Nie</option>
+       </select>
+     </div>
 
     <b>Jak czesto sprawdzasz aktualizacje dotyczace stanu epidemiologicznego?</b>
     <div class="form-group">
@@ -109,17 +97,91 @@
           <input type="radio" name="view" value="2">Raz dziennie
         </label>
         <label class="radio-inline">
-          <input type="radio" name="view" value="3" required>Nie sprawdzam
+          <input type="radio" name="view" value="3">Raz na kilka dni
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="view" value="4" required>Nie sprawdzam
+        </label>
+    </div>
+
+    <b>Czy obecna sytuacja wplynela na stan Twojego samopoczucia?</b>
+    <div class="form-group">
+        <label class="radio-inline">
+          <input type="radio" name="feeling" value="1" required>Tak, pozytywnie
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="feeling" value="2">Tak, negatywnie
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="feeling" value="3">Nie, nie wplynela
+        </label>
+    </div>
+
+    <b>Co jest dla Ciebie głownym źródłem niepokoju w związku z aktualną sytuacją?</b>
+    <div class="form-group">
+        <label class="radio-inline">
+          <input type="radio" name="badfeeling" value="1">Ryzyko zachorowania moje lub bliskich
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="badfeeling" value="2">Kryzys gospodarczy
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="badfeeling" value="3">Nieodwracalne zmiany w relacjach społecznych
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="badfeeling" value="4" required>Nic mnie nie niepokoi
         </label>
     </div>
 
     <div class="form-group">
-        <label for="status">Jak oceniasz postawe rzadu wobec epidemii? (1- zła, 2-przeciętna, 3-dobra) </label>
-        <input type="number" class="form-control" id="status" name="status" min="1" max="3" required>
+      <label for="alcohol">Jak okreslasz zmiane spozycia alkoholu od wprowadzenia stanu zagrozenia epidemiologicznego?</label>
+      <select class="form-control" id="alcohol" name="alcohol">
+        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="1">Brak zmian</option>
+        <option value="2">Zmalalo</option>
+        <option value="3">Wzroslo</option>
+       </select>
+     </div>
+
+    <div class="form-group">
+      <label for="eat">Jak przymusowa izolacja wpłynęła na Twoje nawyki żywieniowe?</label>
+      <select class="form-control" id="eat" name="eat">
+        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="1">Mój jadłospis się nie zmienił</option>
+        <option value="2">Jem więcej, podjadam z nudów</option>
+        <option value="3">Jem mniej/zdrowiej, mam wreszcie czas na przyrządzanie zdrowych posiłków</option>
+        <option value="4">Moje nawyki żywieniowe nie zmieniły się</option>
+       </select>
+     </div>
+
+    <div class="form-group">
+      <label for="selfimpr">Czy udało Ci się wykorzystać czas pandemii na samorozwój?</label>
+      <select class="form-control" id="selfimpr" name="selfimpr">
+        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="1">Tak, udało mi się ukończyć kurs online / podnieść swoje kwalifikacje.</option>
+        <option value="2">Tak, poświęciłem ten czas na realizację swoich zainteresowań.</option>
+        <option value="3">Nie, przeznaczyłem ten czas na niezbędne obowiązki i odpoczynek.</option>
+        <option value="4">Inne.</option>
+       </select>
+     </div>
+
+    <div class="form-group">
+      <label for="job">Czy w związku z epidemią Ty / ktoś z Twojego bliskiego otoczenia stracił pracę lub mierzy się z zawieszeniem działalności gospodarczej, ograniczeniem dochodów?</label>
+      <select class="form-control" id="job" name="job">
+        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="1">Tak</option>
+        <option value="2">Nie</option>
+        <option value="3">Nie wiem</option>
+       </select>
+     </div>
+
+    <div class="form-group">
+        <label for="status">Jak oceniasz działania rządu w obecnej sytuacji? Ocen w skali od 1 - 10, gdzie 1 oznacza negatywnie, 5 neutralnie, 10 pozytywnie.</label>
+        <input type="number" class="form-control" id="status" name="status" min="1" max="10" required>
     </div>
 
 
-    <button type="submit" class="btn btn-default" >Prześlij wypełniony formularz</button>
+    <button type="submit" class="btn btn-primary">Prześlij ankietę</button>
 </form>
 
      <script type="text/javascript">
