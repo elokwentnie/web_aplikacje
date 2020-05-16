@@ -1,8 +1,22 @@
 .home{
 background-color: #e6ffe6;
+font-family: 'Roboto', sans-serif;
+text-align: justify;
+}
+.home.p{
+text-align: justify;
+font-family: 'Roboto', sans-serif;
 }
 
 .title-photo{
 margin: 5px;
 padding: 5px;
+}
+
+body{
+font-family: 'Roboto', sans-serif;
+}
+
+.name{
+font-family: 'Jost', sans-serif;
 }
