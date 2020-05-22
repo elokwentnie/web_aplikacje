@@ -16,9 +16,15 @@
 <script type="text/javascript">
 
   google.charts.load('current', {'packages':['corechart']});
+  google.charts.load('current', {'packages':['bar']});
+
   google.charts.setOnLoadCallback(draw_age_pie);
   google.charts.setOnLoadCallback(draw_home_pie);
   google.charts.setOnLoadCallback(draw_gender_pie);
+  google.charts.setOnLoadCallback(draw_education_pie);
+  google.charts.setOnLoadCallback(drawViewBars);
+  google.charts.setOnLoadCallback(drawBadfeelingBars);
+
   function draw_age_pie() {
      var data = new google.visualization.DataTable();
      data.addColumn('string', 'Wiek');
@@ -60,7 +66,7 @@
      data.addRows( {{ genders|tojson }} );
 
      var options = {
-          title: 'Płec',
+          title: 'Płeć',
           pieHole: 0.4,
           width: 400,
           height: 300
@@ -69,13 +75,133 @@
       var chart = new google.visualization.PieChart(document.getElementById('gender_donut'));
       chart.draw(data, options);
     }
+
+  function draw_education_pie() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Wykształcenie');
+    data.addColumn('number', 'Liczba osob');
+    data.addRows( {{ educations|tojson }} );
+
+    var options = {
+         title: 'Wykształcenie',
+         pieHole: 0.4,
+         width: 400,
+         height: 300
+       };
+
+    var chart = new google.visualization.PieChart(document.getElementById('education_donut'));
+    chart.draw(data, options);
+  }
+
+    function drawViewBars() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Wiek');
+        data.addColumn('number', 'Kilka razy dziennie')
+        data.addColumn('number', 'Raz dziennie');
+        data.addColumn('number', 'Raz na kilka dni');
+        data.addColumn('number', 'Nie sprawdzam');
+        data.addRows( {{ ages_view|tojson }} );
+
+        var options = {
+          chart: {
+            title: 'Wiek a sprawdzanie aktualizacji o koronawirusie'
+          },
+          bars: 'vertical'
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('ages_view'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+      function drawBadfeelingBars() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Wiek');
+        data.addColumn('number', 'Ryzyko zachorowania moje lub bliskich');
+        data.addColumn('number', 'Kryzys gospodarczy')
+        data.addColumn('number', 'Nieodwracalne zmiany w relacjach społecznych');
+        data.addColumn('number', 'Nic mnie nie niepokoi');
+        data.addRows( {{ ages_badfeeling|tojson }} );
+
+        var options = {
+          chart: {
+            title: 'Wiek a główne źródła niepokoju'
+          },
+          bars: 'vertical'
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('ages_badfeeling'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
 </script>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col" id="age_donut"></div>
-    <div class="col" id="home_donut">col</div>
-    <div class="col" id="gender_donut">col</div>
+
+<div class="container">
+   <div class="row">
+     <div class="col-md-4">
+       <div class="donut1" id="age_donut"></div>
+       <div class="donut3" id="home_donut"></div>
+     </div>
+     <div class="col-md-4">
+       <div class="donut3" id="gender_donut"></div>
+       <div class="donut4" id="education_donut"></div>
+     </div>
+     <div class="col-md-4 ml-auto">
+      <div class="jumbotron">
+        <p>Ogólne odczucia wszystkich zbadanych</p>
+        <img class="img-circle" src="" id="face" style="width:50px; border-radius: 50%; background-color #eee">
+        <p>Średnia ocena działań rządu</p>
+        <progress max="10" id="score" value=""></progress>
+      </div>
+    </div>
+  </div>
+
+  <div class="row h-200">
+    <div class="col">
+      <div class="ages_view" id="ages_view"></div>
+    </div>
+    <div class="col">
+      <div class="ages_badfeeling" id="ages_badfeeling" style=></div>
+    </div>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+
+<script type="text/javascript">
+function show_sentiment() {
+    var image = ""
+    if(( {{avg_sentiment}} >= -7) && ( {{avg_sentiment}} <0)) {
+      image = "sad"
+    }
+    else if( {{avg_sentiment}} == 0) {
+      image = "neutral"
+    } else {
+      image = "happy"
+    }
+    document.getElementById('face').src = "/static/images/" + image + ".png";
+
+};
+  show_sentiment();
+</script>
+
+
+<script type="text/javascript">
+function show_score() {
+    var score = {{ avg_score|string }}
+    document.getElementById('score').value = score;
+    if( {{avg_score}} < 5){
+      document.getElementById('score').style.setProperty("--c", "red");
+    }
+    else if( {{avg_score}} == 5) {
+      document.getElementById('score').style.setProperty("--c", "blue");
+    } else {
+      document.getElementById('score').style.setProperty("--c", "green");
+    }
+};
+  show_score();
+</script>
 {% endblock %}

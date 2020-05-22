@@ -1,5 +1,7 @@
 #! /usr/bin/python
+import numpy as np
 
+from utils import results_utils as ru
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -75,17 +77,17 @@ def team():
 
 @app.route('/results', methods=['GET','POST'])
 def results():
-    # store the available options representations
-    age_options = {1: 'Poniżej 18 lat', 2: '18-25 lat', 3: '25-40 lat', 4: 'Powyżej 40 lat'}
-    home_options = {1: "Wieś", 2: "Miasto (do 50 tys. mieszkancow)", 3: "Miasto (50 - 500 tys. mieszkancow", 4: "Miasto (+ 500 tys. mieszkańców)"}
-    gender_options = {1: "Mężczyzna", 2: "Kobieta", 3: "Nie chcę podawać"}
-    personal_data = db.session.query(Formdata.age, Formdata.home, Formdata.gender).all()
-    # create data for rendering
-    ages = [[age_options[opt], len([x[0] for x in personal_data if x[0] == opt])] for opt in age_options.keys()]
-    homes = [[home_options[opt], len([x[1] for x in personal_data if x[1] == opt])] for opt in home_options.keys()]
-    genders = [[gender_options[opt], len([x[2] for x in personal_data if x[2] == opt])] for opt in gender_options.keys()]
+    ages, homes, genders, educations = ru.prepare_personal_data()
+    sentiments = ru.calculate_sentiment()
+    avg_sentiment = np.mean(sentiments)
+    government_scores = ru.prepare_government_status()
+    avg_score = np.mean(government_scores)
+    ages_view, ages_badfeeling = ru.prepare_age_comparison()
 
-    return render_template('results.htm', ages=ages, homes=homes, genders=genders)
+    return render_template('results.htm', ages=ages, homes=homes, genders=genders, educations=educations,
+                           avg_sentiment=avg_sentiment, avg_score=avg_score, ages_view=ages_view,
+                           ages_badfeeling=ages_badfeeling)
+
 
 @app.route("/save", methods=['POST'])
 def save():
@@ -106,7 +108,8 @@ def save():
     job = request.form['job']
     status = request.form['status']
     # Save the data
-    fd = Formdata(age, home, gender, education, place, corona, easter, view, feeling, badfeeling, alcohol, eat, selfimpr, job, status)
+    fd = Formdata(age, home, gender, education, place, corona, easter, view, feeling, badfeeling, alcohol, eat,
+                  selfimpr, job, status)
     db.session.add(fd)
     db.session.commit()
 
@@ -115,3 +118,4 @@ def save():
 if __name__ == "__main__":
     #manager.run()
     app.run(debug=True)
+    #results()
