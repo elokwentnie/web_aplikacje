@@ -80,9 +80,11 @@ def results():
     avg_score = np.mean(government_scores)
     ages_view, ages_badfeeling = ru.prepare_age_comparison(db, Formdata)
 
+    total_cnt = len(ru.fetch_data(db, Formdata.age))
+
     return render_template('results.htm', ages=ages, homes=homes, genders=genders, educations=educations,
                            avg_sentiment=avg_sentiment, avg_score=avg_score, ages_view=ages_view,
-                           ages_badfeeling=ages_badfeeling)
+                           ages_badfeeling=ages_badfeeling, total_cnt=total_cnt)
 
 
 @app.route("/save", methods=['POST'])
