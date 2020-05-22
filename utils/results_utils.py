@@ -32,7 +32,7 @@ def calculate_sentiment(db, Formdata):
 
 
 def prepare_government_status(db, Formdata):
-    answers = fetch_data(Formdata.status)
+    answers = fetch_data(db, Formdata.status)
     scores = [answer[0] for answer in answers]
     return scores
 
