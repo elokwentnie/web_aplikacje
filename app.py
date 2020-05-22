@@ -80,11 +80,16 @@ def results():
     avg_score = np.mean(government_scores)
     ages_view, ages_badfeeling = ru.prepare_age_comparison(db, Formdata)
 
+    corona_sentiment = ru.link_corona_with_sentiment(db, Formdata.corona, Formdata.corona, Formdata.easter, Formdata.feeling,
+                                  Formdata.alcohol, Formdata.eat, Formdata.selfimpr, Formdata.job)
+    corona_score = ru.link_corona_with_score(db, Formdata.corona, Formdata.status)
+
     total_cnt = len(ru.fetch_data(db, Formdata.age))
 
     return render_template('results.htm', ages=ages, homes=homes, genders=genders, educations=educations,
                            avg_sentiment=avg_sentiment, avg_score=avg_score, ages_view=ages_view,
-                           ages_badfeeling=ages_badfeeling, total_cnt=total_cnt)
+                           ages_badfeeling=ages_badfeeling, total_cnt=total_cnt, corona_sentiment=corona_sentiment,
+                           corona_score=corona_score)
 
 
 @app.route("/save", methods=['POST'])
@@ -115,3 +120,4 @@ def save():
 
 if __name__ == "__main__":
     app.run()
+    #results()

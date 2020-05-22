@@ -21,6 +21,8 @@
   google.charts.setOnLoadCallback(draw_education_pie);
   google.charts.setOnLoadCallback(drawViewBars);
   google.charts.setOnLoadCallback(drawBadfeelingBars);
+  google.charts.setOnLoadCallback(drawCoronaScore);
+  google.charts.setOnLoadCallback(drawCoronaSentiment);
 
   function draw_age_pie() {
      var data = new google.visualization.DataTable();
@@ -133,6 +135,41 @@
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
+
+      function drawCoronaSentiment() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Odpowiedź');
+      data.addColumn('number', 'Sentyment');
+      data.addRows( {{ corona_sentiment|tojson}} );
+
+      var options = {
+        title: "Znajomość osoby z koronawirusem a sentyment",
+        width: 400,
+        height: 300,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("corona_sentiment"));
+      chart.draw(data, options);
+      }
+
+      function drawCoronaScore() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Odpowiedź');
+      data.addColumn('number', 'Ocena rządu');
+      data.addRows( {{ corona_score|tojson }} );
+
+      var options = {
+        title: "Znajomość osoby z koronawirusem a ocena działań rządu",
+        width: 400,
+        height: 300,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("corona_score"));
+      chart.draw(data, options);
+      }
+
 </script>
 
 
@@ -174,9 +211,19 @@
       <div class="ages_view" id="ages_view"></div>
     </div>
     <div class="col">
-      <div class="ages_badfeeling" id="ages_badfeeling" style=></div>
+      <div class="ages_badfeeling" id="ages_badfeeling"></div>
     </div>
   </div>
+<br><br>
+    <div class="row">
+    <div class="col">
+      <div class="corona_score" id="corona_score"></div>
+    </div>
+    <div class="col">
+      <div class="corona_sentiment" id="corona_sentiment"></div>
+    </div>
+  </div>
+
 </div>
 <br><br><br><br><br>
 

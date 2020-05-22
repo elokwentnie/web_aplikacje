@@ -1,4 +1,5 @@
 import constants as c
+import numpy as np
 
 
 def fetch_data(db, *columns):
@@ -62,6 +63,41 @@ def link_age_with_answer(db, age, answer, options):
                    [age_options[4], *[len([1 for x in age_4 if x==opt]) for opt in range(1, len(options)+1)]]]
 
     return ages_answer
+
+
+def link_corona_with_score(db, corona, score):
+    corona_options = c.corona_options
+    answers = fetch_data(db, corona, score)
+
+    # group the answers by age
+    corona_1 = [x[1] for x in answers if x[0] == 1]
+    corona_2 = [x[1] for x in answers if x[0] == 2]
+    corona_3 = [x[1] for x in answers if x[0] == 3]
+
+    corona_score = [[corona_options[1], round(np.mean(corona_1))], [corona_options[2], round(np.mean(corona_2))],
+                      [corona_options[3], round(np.mean(corona_3))]]
+
+    return corona_score
+
+
+def link_corona_with_sentiment(db, corona, *answers):
+    corona_options = c.corona_options
+    answers = fetch_data(db, corona, *answers)
+
+    # group the answers by age
+    corona_1 = [x[1:] for x in answers if x[0] == 1]
+    corona_2 = [x[1:] for x in answers if x[0] == 2]
+    corona_3 = [x[1:] for x in answers if x[0] == 3]
+
+    sentiments_1 = list(map(map_answer_to_sentiment, corona_1))
+    sentiments_2 = list(map(map_answer_to_sentiment, corona_2))
+    sentiments_3 = list(map(map_answer_to_sentiment, corona_3))
+
+    corona_sentiment = [[corona_options[1], round((np.mean(sentiments_1) + 7) / 1.4)],
+                        [corona_options[2], round((np.mean(sentiments_2) + 7) / 1.4)],
+                        [corona_options[3], round((np.mean(sentiments_3) + 7) / 1.4)]]
+
+    return corona_sentiment
 
 
 def map_answer_to_sentiment(answers):
