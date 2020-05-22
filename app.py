@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wyniki.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kkgenbnkhfumlr:7e5bf5a2961f3571a049ad287b7d3c96bc0bba6cedcf59e6c89818dffe3f3d76@ec2-54-75-229-28.eu-west-1.compute.amazonaws.com:5432/dajf2u6mmm73or'
 
 db = SQLAlchemy(app)
 
@@ -55,6 +55,7 @@ class Formdata(db.Model):
 def index():
     return render_template('index.htm')
 
+
 @app.route('/about')
 def about():
     return render_template('about.htm')
@@ -72,12 +73,12 @@ def team():
 
 @app.route('/results', methods=['GET','POST'])
 def results():
-    ages, homes, genders, educations = ru.prepare_personal_data()
-    sentiments = ru.calculate_sentiment()
+    ages, homes, genders, educations = ru.prepare_personal_data(db, Formdata)
+    sentiments = ru.calculate_sentiment(db, Formdata)
     avg_sentiment = np.mean(sentiments)
-    government_scores = ru.prepare_government_status()
+    government_scores = ru.prepare_government_status(db, Formdata)
     avg_score = np.mean(government_scores)
-    ages_view, ages_badfeeling = ru.prepare_age_comparison()
+    ages_view, ages_badfeeling = ru.prepare_age_comparison(db, Formdata)
 
     return render_template('results.htm', ages=ages, homes=homes, genders=genders, educations=educations,
                            avg_sentiment=avg_sentiment, avg_score=avg_score, ages_view=ages_view,

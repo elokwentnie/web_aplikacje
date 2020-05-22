@@ -1,21 +1,18 @@
 import constants as c
 
-from app import Formdata
-from app import db
 
-
-def fetch_data(*columns):
+def fetch_data(db, *columns):
     return db.session.query(*columns).all()
 
 
-def prepare_personal_data():
+def prepare_personal_data(db, Formdata):
     # store the available options representations
     age_options = c.age_options
     home_options = c.home_options
     gender_options = c.gender_options
     education_options = c.education_options
     # query the personal data
-    personal_data = fetch_data(Formdata.age, Formdata.home, Formdata.gender, Formdata.education)
+    personal_data = fetch_data(db, Formdata.age, Formdata.home, Formdata.gender, Formdata.education)
     # create data for rendering
     ages = [[age_options[opt], len([x[0] for x in personal_data if x[0] == opt])] for opt in age_options.keys()]
     homes = [[home_options[opt], len([x[1] for x in personal_data if x[1] == opt])] for opt in home_options.keys()]
@@ -27,31 +24,31 @@ def prepare_personal_data():
     return ages, homes, genders, educations
 
 
-def calculate_sentiment():
-    answers = fetch_data(Formdata.corona, Formdata.easter, Formdata.feeling, Formdata.alcohol, Formdata.eat,
+def calculate_sentiment(db, Formdata):
+    answers = fetch_data(db, Formdata.corona, Formdata.easter, Formdata.feeling, Formdata.alcohol, Formdata.eat,
                          Formdata.selfimpr, Formdata.job)
     sentiments = map(map_answer_to_sentiment, answers)
     return list(sentiments)
 
 
-def prepare_government_status():
+def prepare_government_status(db, Formdata):
     answers = fetch_data(Formdata.status)
     scores = [answer[0] for answer in answers]
     return scores
 
 
-def prepare_age_comparison():
+def prepare_age_comparison(db, Formdata):
     view_options = c.view_options
     badfeeling_options = c.badfeeling_options
 
-    ages_view = link_age_with_answer(Formdata.view, view_options)
-    ages_badfeeling = link_age_with_answer(Formdata.badfeeling, badfeeling_options)
+    ages_view = link_age_with_answer(db, Formdata.age, Formdata.view, view_options)
+    ages_badfeeling = link_age_with_answer(db, Formdata.age, Formdata.badfeeling, badfeeling_options)
     return ages_view, ages_badfeeling
 
 
-def link_age_with_answer(answer, options):
+def link_age_with_answer(db, age, answer, options):
     age_options = c.age_options
-    answers = fetch_data(Formdata.age, answer)
+    answers = fetch_data(db, age, answer)
 
     # group the answers by age
     age_1 = [x[1] for x in answers if x[0] == 1]
