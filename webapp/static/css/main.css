@@ -20,3 +20,31 @@ font-family: 'Roboto', sans-serif;
 .name{
 font-family: 'Jost', sans-serif;
 }
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+
+  width: 250px;
+  height: 20px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--c,red);
+}
+
+progress:before {
+  content: attr(data-label);
+  font-size: 0.8em;
+  vertical-align: 0;
+
+  /*Position text over the progress bar */
+  position:absolute;
+}
