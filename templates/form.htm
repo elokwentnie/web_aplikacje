@@ -15,7 +15,7 @@
     <h3>Dane osobiste</h3>
     <div class="form-group">
       <label for="age">Proszę wybrać swój wiek</label>
-      <select class="form-control" id="age" name="age">
+      <select class="form-control" id="age" name="age" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1" >Poniżej 18 lat</option>
         <option value="2">18-25 lat</option>
@@ -26,7 +26,7 @@
 
     <div class="form-group">
       <label for="home">Proszę wybrać miejsce zamieszkania</label>
-      <select class="form-control" id="home" name="home">
+      <select class="form-control" id="home" name="home" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Wieś</option>
         <option value="2">Miasto (do 50 tys. mieszkańców)</option>
@@ -37,7 +37,7 @@
 
     <div class="form-group">
       <label for="gender">Proszę wybrać płeć</label>
-      <select class="form-control" id="gender" name="gender">
+      <select class="form-control" id="gender" name="gender" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Mężczyzna</option>
         <option value="2">Kobieta</option>
@@ -47,7 +47,7 @@
 
     <div class="form-group">
       <label for="education">Twój poziom wykształcenia</label>
-      <select class="form-control" id="education" name="education">
+      <select class="form-control" id="education" name="education" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Podstawowe</option>
         <option value="2">Zawodowe</option>
@@ -61,7 +61,7 @@
      <h3>Zachowania behawioralne</h3>
     <div class="form-group">
       <label for="place">Gdzie znajdowałeś się w momencie ogłoszenia stanu pandemii koronawirusa?</label>
-      <select class="form-control" id="place" name="place">
+      <select class="form-control" id="place" name="place" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">W miejscowości rodzinnej</option>
         <option value="2">W miejsowości, w której wynajmuję pokój / mieszkanie</option>
@@ -71,7 +71,7 @@
 
     <div class="form-group">
       <label for="corona">Czy znasz kogos kto zachorowal na koronawirusa?</label>
-      <select class="form-control" id="corona" name="corona">
+      <select class="form-control" id="corona" name="corona" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Tak</option>
         <option value="2">Nie</option>
@@ -81,7 +81,7 @@
 
     <div class="form-group">
       <label for="easter">Czy miałeś okazję spędzić Święta Wielkanocne z rodziną?</label>
-      <select class="form-control" id="easter" name="easter">
+      <select class="form-control" id="easter" name="easter" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Tak</option>
         <option value="2">Nie</option>
@@ -91,13 +91,13 @@
     <b>Jak czesto sprawdzasz aktualizacje dotyczace stanu epidemiologicznego?</b>
     <div class="form-group">
         <label class="radio-inline">
-          <input type="radio" name="view" value="1">Kilka razy dziennie
+          <input type="radio" name="view" value="1" required>Kilka razy dziennie
         </label>
         <label class="radio-inline">
-          <input type="radio" name="view" value="2">Raz dziennie
+          <input type="radio" name="view" value="2" required>Raz dziennie
         </label>
         <label class="radio-inline">
-          <input type="radio" name="view" value="3">Raz na kilka dni
+          <input type="radio" name="view" value="3" required>Raz na kilka dni
         </label>
         <label class="radio-inline">
           <input type="radio" name="view" value="4" required>Nie sprawdzam
@@ -110,23 +110,23 @@
           <input type="radio" name="feeling" value="1" required>Tak, pozytywnie
         </label>
         <label class="radio-inline">
-          <input type="radio" name="feeling" value="2">Tak, negatywnie
+          <input type="radio" name="feeling" value="2" required>Tak, negatywnie
         </label>
         <label class="radio-inline">
-          <input type="radio" name="feeling" value="3">Nie, nie wplynela
+          <input type="radio" name="feeling" value="3" required>Nie, nie wplynela
         </label>
     </div>
 
     <b>Co jest dla Ciebie głownym źródłem niepokoju w związku z aktualną sytuacją?</b>
-    <div class="form-group">
+    <div class="form-group" >
         <label class="radio-inline">
-          <input type="radio" name="badfeeling" value="1">Ryzyko zachorowania moje lub bliskich
+          <input type="radio" name="badfeeling" value="1" required>Ryzyko zachorowania moje lub bliskich
         </label>
         <label class="radio-inline">
-          <input type="radio" name="badfeeling" value="2">Kryzys gospodarczy
+          <input type="radio" name="badfeeling" value="2" required>Kryzys gospodarczy
         </label>
         <label class="radio-inline">
-          <input type="radio" name="badfeeling" value="3">Nieodwracalne zmiany w relacjach społecznych
+          <input type="radio" name="badfeeling" value="3" required>Nieodwracalne zmiany w relacjach społecznych
         </label>
         <label class="radio-inline">
           <input type="radio" name="badfeeling" value="4" required>Nic mnie nie niepokoi
@@ -135,7 +135,7 @@
 
     <div class="form-group">
       <label for="alcohol">Jak okreslasz zmiane spozycia alkoholu od wprowadzenia stanu zagrozenia epidemiologicznego?</label>
-      <select class="form-control" id="alcohol" name="alcohol">
+      <select class="form-control" id="alcohol" name="alcohol" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Brak zmian</option>
         <option value="2">Zmalalo</option>
@@ -145,7 +145,7 @@
 
     <div class="form-group">
       <label for="eat">Jak przymusowa izolacja wpłynęła na Twoje nawyki żywieniowe?</label>
-      <select class="form-control" id="eat" name="eat">
+      <select class="form-control" id="eat" name="eat" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Mój jadłospis się nie zmienił</option>
         <option value="2">Jem więcej, podjadam z nudów</option>
@@ -156,7 +156,7 @@
 
     <div class="form-group">
       <label for="selfimpr">Czy udało Ci się wykorzystać czas pandemii na samorozwój?</label>
-      <select class="form-control" id="selfimpr" name="selfimpr">
+      <select class="form-control" id="selfimpr" name="selfimpr" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Tak, udało mi się ukończyć kurs online / podnieść swoje kwalifikacje.</option>
         <option value="2">Tak, poświęciłem ten czas na realizację swoich zainteresowań.</option>
@@ -167,7 +167,7 @@
 
     <div class="form-group">
       <label for="job">Czy w związku z epidemią Ty / ktoś z Twojego bliskiego otoczenia stracił pracę lub mierzy się z zawieszeniem działalności gospodarczej, ograniczeniem dochodów?</label>
-      <select class="form-control" id="job" name="job">
+      <select class="form-control" id="job" name="job" required>
         <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Tak</option>
         <option value="2">Nie</option>
@@ -189,10 +189,21 @@
             {
                 var s1 = document.getElementById("age").value;
                 var s2 = document.getElementById("home").value;
-                var s3 = document.getElementById("gender").value;
-                if(s1 == "0" || s2 == "0" || s3 == "0" )
+                var s4 = document.getElementById("gender").value;
+                var s5 = document.getElementById("education").value;
+                var s6 = document.getElementById("place").value;
+                var s7 = document.getElementById("corona").value;
+                var s8 = document.getElementById("easter").value;
+                var s9 = document.getElementById("alcohol").value;
+                var s10 = document.getElementById("selfimpr").value;
+                var s11 = document.getElementById("job").value;
+                var s12 = document.getElementById("eat").value;
+
+
+                if(s1 == "0" || s2 == "0" || s3 == "0" || s4 == "0" || s5 == "0" || s6 == "0" || s7 == "0" || s8 == "0"
+                || s9 == "0" || s10 == "0" || s11 == "0" || s12 == "0" )
                 {
-                    alert("Proszę uzupełnić wszystkie pola formularza, w sekcji danych osobowych");
+                    alert("Proszę uzupełnić wszystkie pola formularza");
                     return false;
                 }
                 return true;
