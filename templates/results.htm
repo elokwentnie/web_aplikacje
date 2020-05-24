@@ -3,6 +3,34 @@
 
 {% block head %}
 <title>Results</title>
+<style>
+svg{
+width:100%;
+}
+
+body{
+    line-height: 1;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    padding-top: 2%;
+    padding-bottom: 1%;
+
+}
+
+.row{
+    width: 100%;
+    margin: 5px;
+    align-items: center;
+}
+
+div.col-lg-6.col-md-12{
+    width: 100%;
+}
+</style>
 {% endblock %}
 
 
@@ -113,10 +141,10 @@
       function drawBadfeelingBars() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Wiek');
-        data.addColumn('number', 'Ryzyko zachorowania moje lub bliskich');
+        data.addColumn('number', 'Ryzyko zachorowania');
         data.addColumn('number', 'Kryzys gospodarczy')
-        data.addColumn('number', 'Nieodwracalne zmiany w relacjach społecznych');
-        data.addColumn('number', 'Nic mnie nie niepokoi');
+        data.addColumn('number', 'Zmiany w relacjach');
+        data.addColumn('number', 'Brak niepokoju');
         data.addRows( {{ ages_badfeeling|tojson }} );
 
         var options = {
@@ -167,75 +195,68 @@
 
 
 <div class="container">
-   <div class="row">
+   <div class="row first-section">
      <div class="col-lg-4 col-md-6 col-sm-12">
          <div class="row">
-             <div class="col">
-                 <label style="font-family: Roboto; font-size:16; color: #757575">Wiek</label>
+                 <label style="font-family: Roboto; font-size:16; color:#757575">Wiek</label>
                  <div class="donut1" id="age_donut"></div>
-             </div>
          </div>
          <div class="row">
-             <div class="col">
-                 <label style="font-family: Roboto; font-size:16; color: #757575">Zamieszkanie</label>
+                 <label style="font-family: Roboto; font-size:16; color:#757575">Zamieszkanie</label>
                  <div class="donut3" id="home_donut"></div>
-             </div>
          </div>
      </div>
        <div class="col-lg-4 col-md-6 col-sm-12">
-         <div class="row xd">
-             <div class="col">
+         <div class="row">
                  <label style="font-family: Roboto; font-size:16; color: #757575">Płeć</label>
                  <div class="donut3" id="gender_donut"></div>
-             </div>
          </div>
          <div class="row">
-             <div class="col">
-                 <label style="font-family: Roboto; font-size:16; color: #757575; text-align: center">Wykształcenie</label>
+                 <label style="font-family: Roboto; font-size:16; color: #757575">Wykształcenie</label>
                  <div class="donut4" id="education_donut"></div>
-             </div>
          </div>
      </div>
      <div class="col-lg-4 col-sm-12">
-       <br><br><br><br>
-       <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      padding: 15px;
-      text-align: center;
-      background-color: white;
-      color: black;">
-       <p><i class="fa fa-user" style="font-size:50px;"></i></p>
-      <h3>{{ total_cnt }}</h3>
-      </div>
-       <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      padding: 35px;
-      text-align: center;
-      background-color: white;
-      color: black;">
-        <p>Ogólne odczucia wszystkich zbadanych</p>
-        <img class="img-circle" src="" id="face" style="margin:auto; display:block; text-align:center; max-width:70px; border-radius: 50%; background-color #eee">
-        <p>Średnia ocena działań rządu</p>
-        <progress max="10" id="score" value="" style="width:100%"></progress>
-      </div>
+           <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                                padding: 15px;
+                                text-align: center;
+                                background-color: white;
+                                color: black;
+                                width: 100%;">
+             <p><i class="fa fa-user" style="font-size:50px;"></i></p>
+             <h3>{{ total_cnt }}</h3>
+           </div>
+           <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                                  padding: 35px;
+                                  text-align: center;
+                                  background-color: white;
+                                  width:100%;
+                                  color: black;">
+                <p>Ogólne odczucia wszystkich zbadanych</p>
+                <img class="img-circle" src="" id="face" style="margin:auto; display:block; text-align:center; max-width:70px; border-radius: 50%; background-color #eee">
+                <p>Średnia ocena działań rządu</p>
+                <progress max="10" id="score" value="" style="width:100%"></progress>
+          </div>
     </div>
   </div>
 <br><br>
   <div class="row">
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-6 col-md-6 col-sm-12">
       <label style="font-family: Roboto; font-size:16; color: #757575">Wiek a sprawdzanie informacji o koronawirusie</label>
       <div class="ages_view" id="ages_view"></div>
     </div>
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-6 col-md-6 col-sm-12">
       <label style="font-family: Roboto; font-size:16; color: #757575">Wiek a główne źródła niepokoju</label>
       <div class="ages_badfeeling" id="ages_badfeeling"></div>
     </div>
   </div>
 <br><br>
     <div class="row">
-    <div class="col-lg-6 col-md-12" style="padding: 5px">
+    <div class="col-lg-6 col-md-6 col-sm-12">
       <label style="font-family: Roboto; font-size:16; color: #757575">Znajomość osoby z koronawirusem a średnia ocena działań rządu</label>
       <div class="corona_score" id="corona_score"></div>
     </div>
-    <div class="col-lg-6 col-md-12" style="padding: 5px">
+    <div class="col-lg-6 col-md-6 col-sm-12">
       <label style="font-family: Roboto; font-size:16; color: #757575">Znajomość osoby z koronawirusem a średni sentyment</label>
       <div class="corona_sentiment" id="corona_sentiment"></div>
     </div>
