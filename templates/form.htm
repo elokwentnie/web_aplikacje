@@ -11,12 +11,12 @@
   <h1>Proszę wypełnić ankietę</h1>
 </div>
 
-<form role="form" onsubmit="return Validate()" action="/save" method="post">
+<form name="myform" role="form" action="/save" method="post">
     <h3>Dane osobiste</h3>
     <div class="form-group">
       <label for="age">Proszę wybrać swój wiek</label>
       <select class="form-control" id="age" name="age" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1" >Poniżej 18 lat</option>
         <option value="2">18-25 lat</option>
         <option value="3">25 - 40 lat</option>
@@ -27,7 +27,7 @@
     <div class="form-group">
       <label for="home">Proszę wybrać miejsce zamieszkania</label>
       <select class="form-control" id="home" name="home" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Wieś</option>
         <option value="2">Miasto (do 50 tys. mieszkańców)</option>
         <option value="3">Miasto (50 - 500 tys. mieszkańców)</option>
@@ -38,7 +38,7 @@
     <div class="form-group">
       <label for="gender">Proszę wybrać płeć</label>
       <select class="form-control" id="gender" name="gender" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Mężczyzna</option>
         <option value="2">Kobieta</option>
         <option value="3">Nie chcę podawac</option>
@@ -48,7 +48,7 @@
     <div class="form-group">
       <label for="education">Twój poziom wykształcenia</label>
       <select class="form-control" id="education" name="education" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Podstawowe</option>
         <option value="2">Zawodowe</option>
         <option value="3">Średnie</option>
@@ -62,7 +62,7 @@
     <div class="form-group">
       <label for="place">Gdzie znajdowałeś się w momencie ogłoszenia stanu pandemii koronawirusa?</label>
       <select class="form-control" id="place" name="place" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">W miejscowości rodzinnej</option>
         <option value="2">W miejsowości, w której wynajmuję pokój / mieszkanie</option>
         <option value="3">Inne</option>
@@ -72,7 +72,7 @@
     <div class="form-group">
       <label for="corona">Czy znasz kogos kto zachorowal na koronawirusa?</label>
       <select class="form-control" id="corona" name="corona" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Tak</option>
         <option value="2">Nie</option>
         <option value="3">Nie wiem</option>
@@ -82,7 +82,7 @@
     <div class="form-group">
       <label for="easter">Czy miałeś okazję spędzić Święta Wielkanocne z rodziną?</label>
       <select class="form-control" id="easter" name="easter" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Tak</option>
         <option value="2">Nie</option>
        </select>
@@ -136,7 +136,7 @@
     <div class="form-group">
       <label for="alcohol">Jak okreslasz zmiane spozycia alkoholu od wprowadzenia stanu zagrozenia epidemiologicznego?</label>
       <select class="form-control" id="alcohol" name="alcohol" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Brak zmian</option>
         <option value="2">Zmalalo</option>
         <option value="3">Wzroslo</option>
@@ -146,7 +146,7 @@
     <div class="form-group">
       <label for="eat">Jak przymusowa izolacja wpłynęła na Twoje nawyki żywieniowe?</label>
       <select class="form-control" id="eat" name="eat" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Mój jadłospis się nie zmienił</option>
         <option value="2">Jem więcej, podjadam z nudów</option>
         <option value="3">Jem mniej/zdrowiej, mam wreszcie czas na przyrządzanie zdrowych posiłków</option>
@@ -157,7 +157,7 @@
     <div class="form-group">
       <label for="selfimpr">Czy udało Ci się wykorzystać czas pandemii na samorozwój?</label>
       <select class="form-control" id="selfimpr" name="selfimpr" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Tak, udało mi się ukończyć kurs online / podnieść swoje kwalifikacje.</option>
         <option value="2">Tak, poświęciłem ten czas na realizację swoich zainteresowań.</option>
         <option value="3">Nie, przeznaczyłem ten czas na niezbędne obowiązki i odpoczynek.</option>
@@ -168,7 +168,7 @@
     <div class="form-group">
       <label for="job">Czy w związku z epidemią Ty / ktoś z Twojego bliskiego otoczenia stracił pracę lub mierzy się z zawieszeniem działalności gospodarczej, ograniczeniem dochodów?</label>
       <select class="form-control" id="job" name="job" required>
-        <option value="0" disabled="disabled" selected hidden>Wybierz...</option>
+        <option value="" disabled="disabled" selected hidden>Wybierz...</option>
         <option value="1">Tak</option>
         <option value="2">Nie</option>
         <option value="3">Nie wiem</option>
@@ -183,33 +183,6 @@
 
     <button type="submit" class="btn btn-primary">Prześlij ankietę</button>
 </form>
-
-     <script type="text/javascript">
-            function Validate()
-            {
-                var s1 = document.getElementById("age").value;
-                var s2 = document.getElementById("home").value;
-                var s4 = document.getElementById("gender").value;
-                var s5 = document.getElementById("education").value;
-                var s6 = document.getElementById("place").value;
-                var s7 = document.getElementById("corona").value;
-                var s8 = document.getElementById("easter").value;
-                var s9 = document.getElementById("alcohol").value;
-                var s10 = document.getElementById("selfimpr").value;
-                var s11 = document.getElementById("job").value;
-                var s12 = document.getElementById("eat").value;
-
-
-                if(s1 == "0" || s2 == "0" || s3 == "0" || s4 == "0" || s5 == "0" || s6 == "0" || s7 == "0" || s8 == "0"
-                || s9 == "0" || s10 == "0" || s11 == "0" || s12 == "0" )
-                {
-                    alert("Proszę uzupełnić wszystkie pola formularza");
-                    return false;
-                }
-                return true;
-            }
-     </script>
-
 
 {% endblock %}
 
