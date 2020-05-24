@@ -31,7 +31,7 @@
      data.addRows( {{ ages|tojson }} );
 
      var options = {
-          title: 'Wiek',
+
           pieHole: 0.4,
           width: 400,
           height: 300
@@ -48,7 +48,6 @@
      data.addRows( {{ homes|tojson }} );
 
      var options = {
-          title: 'Zamieszkanie',
           pieHole: 0.4,
           width: 400,
           height: 300
@@ -65,7 +64,6 @@
      data.addRows( {{ genders|tojson }} );
 
      var options = {
-          title: 'Płeć',
           pieHole: 0.4,
           width: 400,
           height: 300
@@ -82,7 +80,6 @@
     data.addRows( {{ educations|tojson }} );
 
     var options = {
-         title: 'Wykształcenie',
          pieHole: 0.4,
          width: 400,
          height: 300
@@ -103,7 +100,6 @@
 
         var options = {
           chart: {
-            title: 'Wiek a sprawdzanie aktualizacji o koronawirusie',
             height: 500
           },
           bars: 'vertical'
@@ -125,7 +121,6 @@
 
         var options = {
           chart: {
-            title: 'Wiek a główne źródła niepokoju',
             height: 500
           },
           bars: 'vertical'
@@ -143,7 +138,6 @@
       data.addRows( {{ corona_sentiment|tojson}} );
 
       var options = {
-        title: "Znajomość osoby z koronawirusem a sentyment",
         width: 400,
         height: 300,
         bar: {groupWidth: "95%"},
@@ -160,7 +154,6 @@
       data.addRows( {{ corona_score|tojson }} );
 
       var options = {
-        title: "Znajomość osoby z koronawirusem a ocena działań rządu",
         width: 400,
         height: 300,
         bar: {groupWidth: "95%"},
@@ -175,15 +168,35 @@
 
 <div class="container">
    <div class="row">
-     <div class="col-md-4">
-       <div class="donut1" id="age_donut"></div>
-       <div class="donut3" id="home_donut"></div>
+     <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="row">
+             <div class="col">
+                 <label style="font-family: Roboto; font-size:16; color: #757575">Wiek</label>
+                 <div class="donut1" id="age_donut"></div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col">
+                 <label style="font-family: Roboto; font-size:16; color: #757575">Zamieszkanie</label>
+                 <div class="donut3" id="home_donut"></div>
+             </div>
+         </div>
      </div>
-     <div class="col-md-4">
-       <div class="donut3" id="gender_donut"></div>
-       <div class="donut4" id="education_donut"></div>
+       <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="row xd">
+             <div class="col">
+                 <label style="font-family: Roboto; font-size:16; color: #757575">Płeć</label>
+                 <div class="donut3" id="gender_donut"></div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col">
+                 <label style="font-family: Roboto; font-size:16; color: #757575; text-align: center">Wykształcenie</label>
+                 <div class="donut4" id="education_donut"></div>
+             </div>
+         </div>
      </div>
-     <div class="col-md-4 ml-auto">
+     <div class="col-lg-4 col-sm-12">
        <br><br><br><br>
        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       padding: 15px;
@@ -199,33 +212,36 @@
       background-color: white;
       color: black;">
         <p>Ogólne odczucia wszystkich zbadanych</p>
-        <img class="img-circle" src="" id="face" style="position:relative; left:100px; width:50px; border-radius: 50%; background-color #eee">
+        <img class="img-circle" src="" id="face" style="margin:auto; display:block; text-align:center; max-width:70px; border-radius: 50%; background-color #eee">
         <p>Średnia ocena działań rządu</p>
-        <progress max="10" id="score" value=""></progress>
+        <progress max="10" id="score" value="" style="width:100%"></progress>
       </div>
     </div>
   </div>
-
+<br><br>
   <div class="row">
-    <div class="col">
+    <div class="col-lg-6 col-md-12">
+      <label style="font-family: Roboto; font-size:16; color: #757575">Wiek a sprawdzanie informacji o koronawirusie</label>
       <div class="ages_view" id="ages_view"></div>
     </div>
-    <div class="col">
+    <div class="col-lg-6 col-md-12">
+      <label style="font-family: Roboto; font-size:16; color: #757575">Wiek a główne źródła niepokoju</label>
       <div class="ages_badfeeling" id="ages_badfeeling"></div>
     </div>
   </div>
 <br><br>
     <div class="row">
-    <div class="col">
+    <div class="col-lg-6 col-md-12" style="padding: 5px">
+      <label style="font-family: Roboto; font-size:16; color: #757575">Znajomość osoby z koronawirusem a średnia ocena działań rządu</label>
       <div class="corona_score" id="corona_score"></div>
     </div>
-    <div class="col">
+    <div class="col-lg-6 col-md-12" style="padding: 5px">
+      <label style="font-family: Roboto; font-size:16; color: #757575">Znajomość osoby z koronawirusem a średni sentyment</label>
       <div class="corona_sentiment" id="corona_sentiment"></div>
     </div>
   </div>
 
 </div>
-<br><br><br><br><br>
 
 
 <script type="text/javascript">
