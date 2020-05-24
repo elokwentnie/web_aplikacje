@@ -74,8 +74,9 @@ def link_corona_with_score(db, corona, score):
     corona_2 = [x[1] for x in answers if x[0] == 2]
     corona_3 = [x[1] for x in answers if x[0] == 3]
 
-    corona_score = [[corona_options[1], round(np.mean(corona_1))], [corona_options[2], round(np.mean(corona_2))],
-                      [corona_options[3], round(np.mean(corona_3))]]
+    corona_score = [[corona_options[1], np.round(np.mean(corona_1), 1)],
+                    [corona_options[2], np.round(np.mean(corona_2), 1)],
+                    [corona_options[3], np.round(np.mean(corona_3), 1)]]
 
     return corona_score
 
@@ -93,9 +94,9 @@ def link_corona_with_sentiment(db, corona, *answers):
     sentiments_2 = list(map(map_answer_to_sentiment, corona_2))
     sentiments_3 = list(map(map_answer_to_sentiment, corona_3))
 
-    corona_sentiment = [[corona_options[1], round((np.mean(sentiments_1) + 7) / 1.4)],
-                        [corona_options[2], round((np.mean(sentiments_2) + 7) / 1.4)],
-                        [corona_options[3], round((np.mean(sentiments_3) + 7) / 1.4)]]
+    corona_sentiment = [[corona_options[1], np.round((np.mean(sentiments_1) + 7) / 1.4, 1)],
+                        [corona_options[2], np.round((np.mean(sentiments_2) + 7) / 1.4, 1)],
+                        [corona_options[3], np.round((np.mean(sentiments_3) + 7) / 1.4, 1)]]
 
     return corona_sentiment
 
