@@ -11,6 +11,7 @@ width:100%;
 body{
     line-height: 1;
     margin: 0;
+    overflow-x: hidden;
 }
 
 .container {
@@ -128,9 +129,10 @@ div.col-lg-6.col-md-12{
 
         var options = {
           chart: {
-            height: 500
+            height: 500,
           },
-          bars: 'vertical'
+          bars: 'vertical',
+          legend: { position: 'top', maxLines: 4 },
         };
 
         var chart = new google.charts.Bar(document.getElementById('ages_view'));
@@ -149,8 +151,9 @@ div.col-lg-6.col-md-12{
 
         var options = {
           chart: {
-            height: 500
+            height: 500,
           },
+          legend: {position: 'top', maxLines: 4},
           bars: 'vertical'
         };
 
@@ -267,14 +270,14 @@ div.col-lg-6.col-md-12{
 
 <script type="text/javascript">
 function show_sentiment() {
-    var image = ""
-    if(( {{avg_sentiment}} >= -7) && ( {{avg_sentiment}} <0)) {
-      image = "sad"
+    var image = "";
+    if( ({{avg_sentiment}} >= -7) && ( {{avg_sentiment}} <-1)) {
+      image = "sad";
     }
-    else if( {{avg_sentiment}} == 0) {
-      image = "neutral"
+    else if( ({{avg_sentiment}} >= -1) && ( {{avg_sentiment}} <1)) {
+      image = "neutral";
     } else {
-      image = "happy"
+      image = "happy";
     }
     document.getElementById('face').src = "/static/images/" + image + ".png";
 
@@ -287,10 +290,10 @@ function show_sentiment() {
 function show_score() {
     var score = {{ avg_score|string }};
     document.getElementById('score').value = score;
-    if( {{avg_score}} < 5){
+    if( {{avg_score}} < 4.5){
       document.getElementById('score').style.setProperty("--c", "red");
     }
-    else if( {{avg_score}} == 5) {
+    else if( ({{avg_score}} >= 4.5 && ( {{avg_score}} < 5.5 ))  ) {
       document.getElementById('score').style.setProperty("--c", "blue");
     } else {
       document.getElementById('score').style.setProperty("--c", "green");

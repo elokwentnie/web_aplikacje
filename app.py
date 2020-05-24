@@ -75,9 +75,9 @@ def team():
 def results():
     ages, homes, genders, educations = ru.prepare_personal_data(db, Formdata)
     sentiments = ru.calculate_sentiment(db, Formdata)
-    avg_sentiment = np.mean(sentiments)
+    avg_sentiment = np.round(np.mean(sentiments), 2)
     government_scores = ru.prepare_government_status(db, Formdata)
-    avg_score = np.mean(government_scores)
+    avg_score = np.round(np.mean(government_scores), 2)
     ages_view, ages_badfeeling = ru.prepare_age_comparison(db, Formdata)
 
     corona_sentiment = ru.link_corona_with_sentiment(db, Formdata.corona, Formdata.corona, Formdata.easter, Formdata.feeling,
